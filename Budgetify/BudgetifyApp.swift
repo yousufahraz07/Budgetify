@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct BudgetifyApp: App {
+    @StateObject var transactionListVM = TransactionListView()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(transactionListVM)
         }
     }
 }
