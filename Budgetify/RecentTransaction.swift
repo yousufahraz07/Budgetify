@@ -18,6 +18,7 @@ struct RecentTransaction: View {
                 Spacer()
                 //Navigation
                 NavigationLink{
+                    TransactionList()
                     
                 } label : {
                     HStack(spacing: 4) {

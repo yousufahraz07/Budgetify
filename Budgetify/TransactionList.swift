@@ -12,7 +12,21 @@ struct TransactionList: View {
     
     var body: some View {
         VStack{
-            
+            List{
+                //Groups
+                ForEach(Array(transactionListVM.groupTransactionMonth()),id: \.key){
+                    month,transactions in
+                    Section{
+                        ForEach(transactions){transaction in
+                            TransactionRow(transaction: transaction)
+                        }
+                    } header:{
+                        Text(month)
+                    }
+                    .listSectionSeparator(.hidden)
+                }
+            }
+            .listStyle(.plain)
         }
         .navigationTitle("Transactions")
         .navigationBarTitleDisplayMode(.inline)
@@ -20,6 +34,11 @@ struct TransactionList: View {
 }
 
 struct TransactionList_Previews: PreviewProvider {
+    static let transactionListVM : TransactionListView = {
+        let transactionListVM = TransactionListView()
+        transactionListVM.transactions = transactionListPreviewData
+        return transactionListVM
+    }()
     static var previews: some View {
         NavigationView {
             TransactionList()
@@ -27,6 +46,9 @@ struct TransactionList_Previews: PreviewProvider {
         NavigationView {
             TransactionList()
                 .preferredColorScheme(.dark)
+            }
+        .environmentObject(transactionListVM)
         }
+       
     }
-}
+

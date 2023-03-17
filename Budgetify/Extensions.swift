@@ -31,3 +31,13 @@ extension String{
         return parsedDate
     }
 }
+
+extension Date : Strideable{
+    
+}
+
+extension Double {
+    func rounded2()->Double{
+        return (self * 100).rounded()/100
+    }
+}
